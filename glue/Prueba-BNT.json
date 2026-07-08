@@ -1,0 +1,43 @@
+{
+  "name" : "Prueba-BNT",
+  "jobMode" : "VISUAL",
+  "description" : "",
+  "role" : "arn:aws:iam::664418987908:role/Glue-Analitica",
+  "executionProperty" : {
+    "maxConcurrentRuns" : 1
+  },
+  "command" : {
+    "name" : "glueetl",
+    "scriptLocation" : "s3://aws-glue-devod/Prueba-BNT.py",
+    "pythonVersion" : "3"
+  },
+  "defaultArguments" : {
+    "--enable-metrics" : "",
+    "--spark-event-logs-path" : "s3://aws-glue-devod/",
+    "--enable-job-insights" : "true",
+    "--enable-observability-metrics" : "true",
+    "--conf" : "spark.sql.catalog.glue_catalog.glue.skip-name-validation=true",
+    "--enable-glue-datacatalog" : "",
+    "--job-bookmark-option" : "job-bookmark-disable",
+    "--job-language" : "python",
+    "--TempDir" : "s3://aws-glue-devod/"
+  },
+  "connections" : {
+    "connections" : [ "Jdbc connection BNT-PREPRO" ]
+  },
+  "maxRetries" : 0,
+  "allocatedCapacity" : 10,
+  "timeout" : 480,
+  "maxCapacity" : 10.0,
+  "glueVersion" : "5.0",
+  "numberOfWorkers" : 10,
+  "workerType" : "G.1X",
+  "executionClass" : "STANDARD",
+  "codeGenConfigurationNodes" : "{\"node-1754679794753\":{\"SparkSQL\":{\"Inputs\":[\"node-1754679221693\"],\"Name\":\"SQL Query\",\"OutputSchemas\":[{\"Columns\":[{\"Name\":\"Cuenta\",\"Type\":\"int\"},{\"Name\":\"Operacion\",\"Type\":\"int\"},{\"Name\":\"SubOperacion\",\"Type\":\"int\"},{\"Name\":\"TipoOperacion\",\"Type\":\"smallint\"},{\"Name\":\"Estado\",\"Type\":\"smallint\"},{\"Name\":\"FechaValor\",\"Type\":\"timestamp\"},{\"Name\":\"IdEngineValue\",\"Type\":\"string\"}]}],\"SqlAliases\":[{\"Alias\":\"myDataSource\",\"From\":\"node-1754679221693\"}],\"SqlQuery\":\"select Aocta As Cuenta, Aooper As Operacion, Aosbop As SubOperacion, Aotope As TipoOperacion, Aostat As Estado, Aofval As FechaValor,  \\nSUBSTRING(\\n        JCCM72Xml,\\n        LOCATE('<IdEngine>', JCCM72Xml) + LENGTH('<IdEngine>'),\\n        LOCATE('</IdEngine>', JCCM72Xml) - (LOCATE('<IdEngine>', JCCM72Xml) + LENGTH('<IdEngine>'))\\n    ) AS IdEngineValue\\nfrom myDataSource Limit 20\"}},\"node-1754690657324\":{\"S3CatalogTarget\":{\"Database\":\"default\",\"Inputs\":[\"node-1754679794753\"],\"Name\":\"AWS Glue Data Catalog\",\"PartitionKeys\":[],\"SchemaChangePolicy\":{\"EnableUpdateCatalog\":false},\"Table\":\"instancias\"}},\"node-1754679221693\":{\"Join\":{\"Columns\":[{\"From\":\"node-1754679138285\",\"Keys\":[[\"aocta\"],[\"aooper\"],[\"aosbop\"],[\"aotope\"]]},{\"From\":\"node-1754679174211\",\"Keys\":[[\"xwfcuenta\"],[\"xwfoperacion\"],[\"xwfsubope\"],[\"xwftipope\"]]}],\"Inputs\":[\"node-1754679138285\",\"node-1754679174211\"],\"JoinType\":\"equijoin\",\"Name\":\"Join\"}},\"node-1754679094457\":{\"DirectJDBCSource\":{\"ConnectionName\":\"Jdbc connection BNT-PREPRO\",\"ConnectionType\":\"sqlserver\",\"Database\":\"amb-func2.cdmcofg7ggyx.us-east-1.rds.amazonaws.com:1433;databaseName=GXfuncional\",\"Name\":\"xwf700\",\"OutputSchemas\":[{\"Columns\":[{\"Name\":\"xwfempresa\",\"Type\":\"smallint\"},{\"Name\":\"xwfsucursal\",\"Type\":\"int\"},{\"Name\":\"xwfmodulo\",\"Type\":\"int\"},{\"Name\":\"xwfmoneda\",\"Type\":\"smallint\"},{\"Name\":\"xwfpapel\",\"Type\":\"int\"},{\"Name\":\"xwfcuenta\",\"Type\":\"int\"},{\"Name\":\"xwfoperacion\",\"Type\":\"int\"},{\"Name\":\"xwfsubope\",\"Type\":\"int\"},{\"Name\":\"xwftipope\",\"Type\":\"smallint\"},{\"Name\":\"xwfprcins\",\"Type\":\"decimal(10,2)\"},{\"Name\":\"xwfmonto1\",\"Type\":\"decimal(10,2)\"},{\"Name\":\"xwfmonto2\",\"Type\":\"decimal(10,2)\"},{\"Name\":\"xwfplazo1\",\"Type\":\"int\"},{\"Name\":\"xwfplazo2\",\"Type\":\"int\"},{\"Name\":\"xwfcar1\",\"Type\":\"string\"},{\"Name\":\"xwfcar2\",\"Type\":\"string\"},{\"Name\":\"xwffec1\",\"Type\":\"timestamp\"},{\"Name\":\"xwffec2\",\"Type\":\"timestamp\"},{\"Name\":\"xwfemp1\",\"Type\":\"smallint\"},{\"Name\":\"xwfcta1\",\"Type\":\"int\"},{\"Name\":\"xwfcar3\",\"Type\":\"string\"}]}],\"RedshiftTmpDir\":\"\",\"Table\":\"xwf700\"}},\"node-1754679138285\":{\"DirectJDBCSource\":{\"ConnectionName\":\"Jdbc connection BNT-PREPRO\",\"ConnectionType\":\"sqlserver\",\"Database\":\"amb-func2.cdmcofg7ggyx.us-east-1.rds.amazonaws.com:1433;databaseName=GXfuncional\",\"Name\":\"fsd010\",\"OutputSchemas\":[{\"Columns\":[{\"Name\":\"pgcod\",\"Type\":\"smallint\"},{\"Name\":\"aomod\",\"Type\":\"int\"},{\"Name\":\"aosuc\",\"Type\":\"int\"},{\"Name\":\"aomda\",\"Type\":\"smallint\"},{\"Name\":\"aopap\",\"Type\":\"int\"},{\"Name\":\"aocta\",\"Type\":\"int\"},{\"Name\":\"aooper\",\"Type\":\"int\"},{\"Name\":\"aosbop\",\"Type\":\"int\"},{\"Name\":\"aotope\",\"Type\":\"smallint\"},{\"Name\":\"aofval\",\"Type\":\"timestamp\"},{\"Name\":\"aofvto\",\"Type\":\"timestamp\"},{\"Name\":\"aopzo\",\"Type\":\"int\"},{\"Name\":\"aottas\",\"Type\":\"smallint\"},{\"Name\":\"aotasa\",\"Type\":\"decimal(10,2)\"},{\"Name\":\"aotmor\",\"Type\":\"decimal(10,2)\"},{\"Name\":\"aottac\",\"Type\":\"smallint\"},{\"Name\":\"aotasc\",\"Type\":\"decimal(10,2)\"},{\"Name\":\"aotdia\",\"Type\":\"smallint\"},{\"Name\":\"aotvto\",\"Type\":\"string\"},{\"Name\":\"aotano\",\"Type\":\"smallint\"},{\"Name\":\"aotint\",\"Type\":\"string\"},{\"Name\":\"aodrev\",\"Type\":\"int\"},{\"Name\":\"aoimp\",\"Type\":\"decimal(10,2)\"},{\"Name\":\"aopre\",\"Type\":\"decimal(10,2)\"},{\"Name\":\"aopre1\",\"Type\":\"decimal(10,2)\"},{\"Name\":\"aotcbi\",\"Type\":\"decimal(10,2)\"},{\"Name\":\"aotcbi1\",\"Type\":\"decimal(10,2)\"},{\"Name\":\"aoarb\",\"Type\":\"decimal(10,2)\"},{\"Name\":\"aoarb1\",\"Type\":\"decimal(10,2)\"},{\"Name\":\"aomd\",\"Type\":\"string\"},{\"Name\":\"aomd1\",\"Type\":\"string\"},{\"Name\":\"aonume\",\"Type\":\"decimal(10,2)\"},{\"Name\":\"aofnum\",\"Type\":\"timestamp\"},{\"Name\":\"aoafiv\",\"Type\":\"string\"},{\"Name\":\"aocbcu\",\"Type\":\"smallint\"},{\"Name\":\"aostat\",\"Type\":\"smallint\"},{\"Name\":\"aoavis\",\"Type\":\"smallint\"},{\"Name\":\"aoplus\",\"Type\":\"decimal(10,2)\"},{\"Name\":\"aoeven\",\"Type\":\"int\"},{\"Name\":\"aofe99\",\"Type\":\"timestamp\"},{\"Name\":\"aocltcod\",\"Type\":\"int\"},{\"Name\":\"aoperiod\",\"Type\":\"int\"},{\"Name\":\"aofinc\",\"Type\":\"timestamp\"},{\"Name\":\"aoamort\",\"Type\":\"smallint\"},{\"Name\":\"aofultpag\",\"Type\":\"timestamp\"}]}],\"RedshiftTmpDir\":\"\",\"Table\":\"fsd010\"}},\"node-1754678950727\":{\"DirectJDBCSource\":{\"ConnectionName\":\"Jdbc connection BNT-PREPRO\",\"ConnectionType\":\"sqlserver\",\"Database\":\"amb-func2.cdmcofg7ggyx.us-east-1.rds.amazonaws.com:1433;databaseName=GXfuncional\",\"Name\":\"jccm72\",\"OutputSchemas\":[{\"Columns\":[{\"Name\":\"jccm72ins\",\"Type\":\"decimal(10,2)\"},{\"Name\":\"jccm72xml\",\"Type\":\"string\"},{\"Name\":\"jccm72ax1\",\"Type\":\"decimal(10,2)\"},{\"Name\":\"jccm72ax2\",\"Type\":\"decimal(10,2)\"},{\"Name\":\"jccm72ax3\",\"Type\":\"string\"},{\"Name\":\"jccm72ax4\",\"Type\":\"string\"},{\"Name\":\"jccm72ax5\",\"Type\":\"timestamp\"}]}],\"RedshiftTmpDir\":\"\",\"Table\":\"jccm72\"}},\"node-1754679174211\":{\"Join\":{\"Columns\":[{\"From\":\"node-1754678950727\",\"Keys\":[[\"jccm72ins\"]]},{\"From\":\"node-1754679094457\",\"Keys\":[[\"xwfprcins\"]]}],\"Inputs\":[\"node-1754678950727\",\"node-1754679094457\"],\"JoinType\":\"equijoin\",\"Name\":\"Join\"}}}",
+  "sourceControlDetails" : {
+    "provider" : "GITHUB",
+    "repository" : "AWS",
+    "branch" : "DataAnalitica-C-patch-1",
+    "folder" : "glue"
+  }
+}
