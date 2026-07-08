@@ -34,7 +34,7 @@
   "sourceControlDetails" : {
     "provider" : "GITHUB",
     "repository" : "AWS",
-    "branch" : "DataAnalitica-C-patch-1",
+    "branch" : "Develop",
     "folder" : "glue"
   }
 }
