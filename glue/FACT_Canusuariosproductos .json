@@ -8,7 +8,7 @@
   },
   "command" : {
     "name" : "glueetl",
-    "scriptLocation" : "s3://aws-glue-assets-664418987908-us-east-1/scripts/FACT_Canusuariosproductos .py",
+    "scriptLocation" : "s3://aws-glue-assets-664418987908-us-east-1/scripts/FACT_Canusuariosproductos.py",
     "pythonVersion" : "3"
   },
   "defaultArguments" : {
